@@ -1,0 +1,17 @@
+1. залить на хостинг файлы step1.php, step2.php, step3.php и указав права 755 на папку, в которой будут расположены скрипты
+2. прописать задание cron * * * * * /usr/bin/php /path/to/scriptdir/step1.php
+3. прописать задание cron */2 * * * * /usr/bin/php /path/to/scriptdir/step2.php
+
+Для использования:
+залить в папку где находятся скрипт файл account.txt с правами 777 (скрипт будет пытаться удалить этот файл когда закончит работу)
+файл account.txt содержит данные аккаунта hh и строку на результат выборки в виде email;password;search_result_page
+пример: email@site.ru;superpassword;https://hh.ru/search/resume?text=&logic=normal&pos=full_text&exp_period=all_time&area=1556&relocation=living_or_relocation&salary_from=&salary_to=&currency_code=RUR&education=none&age_from=&age_to=27&gender=unknown&order_by=publication_time&search_period=0&items_on_page=100
+ВАЖНО!!! сайт должен использоваться основной hh.ru, если ссылка ведет на поддомен (msk.hh.ru, spb.hh.ru) - следует убрать поддомен из строки
+ВАЖНО!!! в строке не должна содержать &page= этот параметр скрипт добавляет автоматически и изменяет для обхода страниц
+Помните, что hh.ru не позволяет парсить более 500 резюме в сутки.
+Помните, что hh.ru не отображает в результатах поиска более 5000 резюме.
+Скрипт собирает по 15 резюме раз в две минуты.
+
+Когда скрипт закончит работу полностью (максимально - через 10 суток), в папаке со скриптами появится файл resumes.xls
+
+
